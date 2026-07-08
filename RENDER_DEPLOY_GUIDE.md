@@ -76,8 +76,8 @@ In the Render service dashboard, go to **Environment** → **Add Environment Var
 
 | Key | Value |
 |---|---|
-| `FIREBASE_WEB_API_KEY` | `AIzaSyBEiLbRAexvwj9rF1IQKTS5zIvLppHnGQo` |
-| `FIREBASE_PROJECT_ID` | `eye-disease-detection-dfc71` |
+| `FIREBASE_WEB_API_KEY` | `` |
+| `FIREBASE_PROJECT_ID` | `` |
 | `FIREBASE_SERVICE_ACCOUNT_JSON` | *(Paste the full JSON from serviceAccountKey.json as a single-line string)* |
 | `ALLOWED_ORIGINS` | `*` *(or your frontend URL e.g. `https://my-frontend.vercel.app`)* |
 
