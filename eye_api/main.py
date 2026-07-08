@@ -14,6 +14,14 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from typing import Optional
 
+# ── Ensure eye_api/ is always importable regardless of launch location ────────
+# When Render runs `uvicorn eye_api.main:app` from the project root,
+# Python treats eye_api as a package and doesn't add its directory to sys.path.
+# This line fixes all sibling imports (model_architecture, firebase_config, etc.)
+_THIS_DIR = Path(__file__).parent.resolve()
+if str(_THIS_DIR) not in sys.path:
+    sys.path.insert(0, str(_THIS_DIR))
+
 import cv2
 import numpy as np
 import torch
