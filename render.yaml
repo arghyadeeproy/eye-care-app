@@ -1,0 +1,35 @@
+# render.yaml — Render Infrastructure Blueprint
+# Deploys the Eye Disease Detection FastAPI backend as a Web Service.
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: eye-disease-api
+    runtime: python
+    region: oregon          # Change to: oregon | frankfurt | singapore | ohio
+    plan: starter           # free | starter | standard | pro
+    rootDir: .              # project root (where requirements.txt lives)
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn eye_api.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+
+    envVars:
+      # ── Firebase ─────────────────────────────────────────────
+      - key: FIREBASE_WEB_API_KEY
+        sync: false           # Set this manually in the Render dashboard
+
+      - key: FIREBASE_PROJECT_ID
+        sync: false           # Set this manually in the Render dashboard
+
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false           # Paste the entire serviceAccountKey.json content as JSON string
+
+      # ── CORS ─────────────────────────────────────────────────
+      # List your frontend URLs separated by commas.
+      # Set to * to allow all (suitable for public APIs / development).
+      - key: ALLOWED_ORIGINS
+        value: "*"
+
+      # ── Python ───────────────────────────────────────────────
+      - key: PYTHON_VERSION
+        value: "3.11.0"
